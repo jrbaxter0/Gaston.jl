@@ -72,7 +72,11 @@ function write_data(curve, dims, file; append = false)
             if ndims(x) == 1 && ndims(y) == 1 && ndims(z) == 2
                 for (yi,yy) in enumerate(y)
                     for (xi,xx) in enumerate(x)
-                        write(io, "$xx $yy $(z[yi,xi])\n")
+                        if supp === nothing
+                            write(io, "$xx $yy $(z[yi,xi])\n")
+                        else
+                            write(io, "$xx $yy $(z[yi,xi]) $(supp[yi,xi])\n")
+                        end
                     end
                     write(io, "\n")
                 end
