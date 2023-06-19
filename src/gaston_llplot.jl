@@ -96,7 +96,11 @@ function write_data(curve, dims, file; append = false)
             # arbitrary plot
             elseif ndims(x) == 2 && ndims(y) == 2 && ndims(z) == 2
                 for col = 1:size(x)[2]
-                    writedlm(io, [x[:,col] y[:,col] z[:,col]])
+                    if supp === nothing
+                        writedlm(io, [x[:,col] y[:,col] z[:,col]])
+                    else
+                        writedlm(io, [x[:,col] y[:,col] z[:,col] supp[:,col]])
+                    end
                     write(io, "\n")
                 end
             end
